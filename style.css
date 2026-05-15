@@ -1,0 +1,316 @@
+* {
+    margin:0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+body {
+    min-height: 100dvh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    background-color: #cacaca(97.18% 4.48 252.55);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+}
+
+/*este de la barra navegadora*/
+nav {
+    width: 100%;
+    background-color: hsl(230, 17%, 93%);
+    box-shadow: 2 8px rgba(0,0,0,0.15);
+    padding: 2px 0;
+    margin-bottom: 10px;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+/*espacio entre los textos de la barra*/
+
+.nav-links {
+    display: flex;
+    list-style: none;
+    gap: 36px; 
+}
+
+/*texto de la barra de navegacion*/
+
+.nav-links a {
+    text-decoration: none;
+    color:#333;
+    font-size: 15px;
+    position: relative;
+}
+ 
+/*color del texto de la barraa*/
+
+.nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: #000000;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: 0.3s ease-in-out;
+}
+
+.nav-links a:hover::after {
+    transform: scaleX(1);
+}
+
+/*el padding aqui es que tan pegado esta el texto de la barra*/
+
+.Contenedor-principal {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 1px 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 60px;
+   
+    
+}
+
+.logo {
+    height: 180px;
+    width: auto;
+    display: block;
+    object-fit: contain
+}
+
+#Titulo-Principal {
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+    color: rgb(0, 0, 0);
+    margin-top: 70px;
+}
+
+p.texto {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 25px;
+    line-height: justify;
+}
+
+.barra-busqueda {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  overflow: hidden;
+  margin: 20px auto;
+}
+
+.barra-busqueda input {
+  flex: 1;
+  padding: 12px 16px;
+  border: none;
+  outline: none;
+  font-size: 15px;
+  color: #333;
+}
+
+.barra-busqueda button {
+  padding: 12px 18px;
+  background-color: white;
+  border: none;
+  border-left: 1px solid #ccc;
+  cursor: pointer;
+  font-size: 18px;
+  color: #0078d4; /* azul Microsoft */
+  transition: background 0.2s;
+}
+
+.barra-busqueda button:hover {
+  background-color: #f0f0f0;
+}
+
+.seccion-titulo {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #000;
+}
+
+/*aqui comenzamos con las tarjetas y graficos*/
+
+.cards-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas como Microsoft */
+  gap: 16px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #fff;
+  transition: box-shadow 0.2s;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+}
+
+.card img {
+  width: 100%;
+  height: 120px;
+  object-fit: cover; /* la imagen cubre el espacio sin deformarse */
+}
+
+.card-body {
+  padding: 14px 16px;
+}
+
+.card-body h3 {
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #000;
+}
+
+.card-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.card-body ul a {
+  text-decoration: none;
+  color: #333;
+  font-size: 13px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.card-body ul a:hover {
+  color: #0078d4}
+
+
+:root {
+    --azul-oscuro: #1a2b4b; /* El color "ancla" para el footer */
+    --azul-acento: #007bff; /* El color de los links y bordes */
+    --gris-texto: #d1d1d1;
+    --blanco: #ffffff;
+}
+
+.main-footer {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    background-color: var(--azul-oscuro);
+    color: var(--blanco);
+    padding: 60px 0 0 0;
+    font-family: 'Segoe UI', Roboto, sans-serif;
+}
+
+.footer-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    padding: 0 20px 40px 20px;
+}
+
+.footer-column {
+    flex: 1;
+    min-width: 200px;
+    margin-bottom: 20px;
+}
+
+.footer-column h3 {
+    font-size: 1.1rem;
+    margin-bottom: 20px;
+    position: relative;
+    padding-bottom: 10px;
+}
+
+/* Línea decorativa bajo los títulos */
+.footer-column h3::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--azul-acento);
+}
+
+.footer-column ul {
+    list-style: none;
+    padding: 0;
+}
+
+.footer-column ul li {
+    margin-bottom: 12px;
+}
+
+.footer-column ul li a {
+    color: var(--gris-texto);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.footer-column ul li a:hover {
+    color: var(--azul-acento);
+}
+
+.brand-info p {
+    font-size: 0.9rem;
+    color: var(--gris-texto);
+    line-height: 1.6;
+    max-width: 250px;
+}
+
+/* Sección de Copyright */
+.footer-copyright {
+    background-color: #121d33;
+    text-align: center;
+    padding: 20px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+.footer-copyright p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #888;
+}
+
+.legal-tag {
+    margin-left: 15px;
+    padding: 2px 8px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    text-transform: uppercase;
+    font-size: 0.7rem;
+}

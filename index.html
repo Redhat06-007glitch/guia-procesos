@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>GUIA INTEGRAL DE PROCESOS</title>
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="#">
+                    <img src="img/6t-removebg-preview.png" alt="logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Procesos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="Contenedor-principal">
+        <br>
+    <h1 id="Titulo-Principal" >GUIA INTEGRAL DE PROCESOS</h1>
+    
+   <div class="barra-busqueda">
+  <i class="ti ti-search" style="padding: 0 10px; color: #888; font-size:18px;"></i>
+  <input type="text" id="q" placeholder="Buscar respuestas..." autocomplete="off" />
+  <i class="ti ti-x" id="clear-btn" style="display:none; cursor:pointer; padding: 0 12px; color:#888; font-size:18px;"></i>
+</div>
+
+<!-- Resultados de búsqueda -->
+<div id="results" style="width:100%; max-width:600px; margin: 0 auto;"></div>
+
+<style>
+  #results .result-item {
+    padding: 12px 16px;
+    border-radius: 6px;
+    border: 1px solid #e0e0e0;
+    background: #fff;
+    margin-bottom: 6px;
+  }
+  #results .result-category {
+    font-size: 11px;
+    color: #888;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 3px;
+  }
+  #results .result-title {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a1a1a;
+    margin-bottom: 8px;
+  }
+  #results .result-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  #results .result-link {
+    font-size: 13px;
+    color: #0078d4;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  #results .result-link:hover { text-decoration: underline; }
+  #results mark {
+    background: transparent;
+    color: #0078d4;
+    font-weight: 500;
+  }
+  #results .empty { font-size: 14px; color: #888; padding: 1rem 0; }
+</style>
+
+<script>
+  const DATA = [
+    { cat: "Contabilidad (SIESA)", q: "¿Cuál es la ruta para ingresar facturas en SIESA?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Qué información se debe diligenciar al ingresar una factura?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Qué se debe verificar antes de aprobar un paquete de facturas?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"},{label:"Link tres",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Cuál es la ruta para habilitar documentos en cuentas por pagar?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"},{label:"Link tres",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Cómo se imprimen los pagos realizados?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"},{label:"Link tres",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Cómo se descarga una factura desde la DIAN?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"},{label:"Link tres",url:"#"}] },
+    { cat: "Contabilidad (SIESA)", q: "¿Cuál es la ruta para actualizar activos fijos?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"},{label:"Link tres",url:"#"}] },
+    { cat: "Novedades (TNL)", q: "¿Cuál es la ruta para registrar tiempos no laborados?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Novedades (TNL)", q: "¿Qué se debe tener en cuenta al registrar incapacidades?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Licencias", q: "¿Cómo se clasifican las licencias?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Licencias", q: "¿Cómo se generan los comprobantes de pago?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Licencias", q: "¿Cómo se consulta el salario de un empleado?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Licencias", q: "¿Cómo se generan los aportes de seguridad social?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+    { cat: "Licencias", q: "¿Cómo se liquidan los aportes de seguridad social?", links: [{label:"Link uno",url:"#"},{label:"Link dos",url:"#"}] },
+  ];
+
+  function normalize(s) {
+    return s.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+  }
+  function highlight(text, term) {
+    if (!term) return text;
+    const re = new RegExp(`(${term.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")})`, "gi");
+    return text.replace(re, "<mark>$1</mark>");
+  }
+  function render(items, term) {
+    const el = document.getElementById("results");
+    if (!items.length) {
+      el.innerHTML = '<p class="empty">No se encontraron resultados.</p>';
+      return;
+    }
+    el.innerHTML = items.map(item => `
+      <div class="result-item">
+        <div class="result-category">${item.cat}</div>
+        <div class="result-title">${highlight(item.q, term)}</div>
+        <div class="result-links">
+          ${item.links.map(l => `<a class="result-link" href="${l.url}">🔷 ${l.label}</a>`).join("")}
+        </div>
+      </div>
+    `).join("");
+  }
+
+  const input = document.getElementById("q");
+  const clearBtn = document.getElementById("clear-btn");
+
+  input.addEventListener("input", () => {
+    const raw = input.value.trim();
+    clearBtn.style.display = raw ? "inline" : "none";
+    if (!raw) { document.getElementById("results").innerHTML = ""; return; }
+    const tokens = normalize(raw).split(/\s+/);
+    const matches = DATA.filter(d =>
+      tokens.every(t => normalize(d.q).includes(t) || normalize(d.cat).includes(t))
+    );
+    render(matches, raw);
+  });
+
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    clearBtn.style.display = "none";
+    document.getElementById("results").innerHTML = "";
+    input.focus();
+  });
+</script>
+
+    <p class="texto">Esta plataforma web es una guía integral para apoyar procesos de nómina y contabilidad en empresas y practicantes, ofreciendo casos prácticos, rutas claras y herramientas que facilitan la gestión administrativa, reducen errores y mejoran la eficiencia en el manejo de la información. Además,
+       permite la integración con soluciones como SIESA para fortalecer el trabajo en entornos reales.</p>
+  
+    </p>
+</div>
+
+<div class="seccion-cards">
+  <br>
+  <br>
+
+    <h2 class="seccion-titulo">CONTABILIDAD (SIESA)</h2>
+    <br>
+
+    <div class="cards-grid">
+
+      <!-- Tarjeta 1 -->
+      <div class="card">
+        <img src="img/wedrw.png" alt="Tema 1">
+        <div class="card-body">
+          <h3>¿Cuál es la ruta para ingresar facturas en SIESA?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjeta 2 -->
+      <div class="card">
+        <img src="img/asdas.png" alt="Tema 2">
+        <div class="card-body">
+          <h3>¿Qué información se debe diligenciar al ingresar una factura?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+ 
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjeta 3 -->
+      <div class="card">
+        <img src="img/sdf.png" alt="Tema 3">
+        <div class="card-body">
+          <h3>¿Qué se debe verificar antes de aprobar un paquete de facturas?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+            <li><a href="#">🔷 Link tres</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjeta 4 -->
+      <div class="card">
+        <img src="img/jsdkf.png" alt="Tema 4">
+        <div class="card-body">
+          <h3> ¿Cuál es la ruta para habilitar documentos en cuentas por pagar?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+            <li><a href="#">🔷 Link tres</a></li>
+          </ul>
+        </div>
+      </div>
+
+            <!-- Tarjeta  -->
+      <div class="card">
+        <img src="img/dsfjhiw.png" alt="Tema 5">
+        <div class="card-body">
+          <h3>¿Cómo se imprimen los pagos realizados?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+            <li><a href="#">🔷 Link tres</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+            <!-- Tarjeta 6 -->
+      <div class="card">
+        <img src="img/yueriryeio.png"Tema 6">
+        <div class="card-body">
+          <h3> ¿Cómo se descarga una factura desde la DIAN?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+            <li><a href="#">🔷 Link tres</a></li>
+          </ul>
+        </div>
+      </div>
+
+
+            <!-- Tarjeta 7 -->
+      <div class="card">
+        <img src="img/i234.png"Tema 7">
+        <div class="card-body">
+          <h3>¿Cuál es la ruta para actualizar activos fijos?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+            <li><a href="#">🔷 Link tres</a></li>
+          </ul>
+        </div>
+      </div>
+
+  </div>
+  </div>
+</body>
+
+
+<div class="seccion-cards">
+  <br>
+  <br>
+    <h3 class="seccion-titulo">NOVEDADES (TNL)</h3>
+    <br>
+      <div class="cards-grid">
+
+       <!-- Tarjeta 10 -->
+      <div class="card">
+        <img src="img/i234.png" alt="Tema 10">
+        <div class="card-body">
+          <h3>¿Cuál es la ruta para registrar tiempos no laborados?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Tarjeta 11 -->
+      <div class="card">
+        <img src="img/23234.png" alt="Tema 11">
+        <div class="card-body">
+          <h3>¿Qué se debe tener en cuenta al registrar incapacidades?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+  
+    </div>
+  </div>
+</body>
+
+
+<div class="seccion-cards">
+  <br>
+  <br>
+    <h3 class="seccion-titulo">LICENCIAS</h3>
+    <br>
+      <div class="cards-grid">
+
+
+           <!-- Tarjeta 12 -->
+      <div class="card">
+        <img src="img/34798348.png" alt="Tema 12">
+        <div class="card-body">
+          <h3>¿Cómo se clasifican las licencias?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+             <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+           <!-- Tarjeta 13 -->
+        <div class="card">
+        <img src="img/23180.png" alt="Tema 13">
+        <div class="card-body">
+          <h3>¿Cómo se generan los comprobantes de pago?</h3>
+          <ul>
+            <li><a href="paginas/comprobantes.html">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+       </div>
+
+        <!-- Tarjeta 14 -->
+      <div class="card">
+        <img src="img/4532.png" alt="Tema 14">
+        <div class="card-body">
+          <h3> ¿Cómo se consulta el salario de un empleado?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+             <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+          <!-- Tarjeta 15 -->
+      <div class="card">
+        <img src="img/7868.png" alt="Tema 15">
+        <div class="card-body">
+          <h3>¿Cómo se generan los aportes de seguridad social?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+             <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+      </div>
+
+                <!-- Tarjeta 16 -->
+      <div class="card">
+        <img src="img/232322.png" alt="Tema 16">
+        <div class="card-body">
+          <h3>¿Cómo se generan los aportes de seguridad social?</h3>
+          <ul>
+            <li><a href="#">🔷 Link uno</a></li>
+            <li><a href="#">🔷 Link dos</a></li>
+             <li><a href="#">🔷 Link dos</a></li>
+          </ul>
+        </div>
+     </div>
+  </div>
+</body>
+
+  <br>
+  <br>
+
+<footer class="main-footer">
+    <div class="footer-container">
+        <div class="footer-column brand-info">
+            <h2 class="footer-logo">Medicips</h2>
+            <p>Plataforma líder en gestión de bienestar y soluciones administrativas para el sector salud.</p>
+            <div class="social-links">
+                <a href="#">LinkedIn</a>
+                <a href="#">Twitter</a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h3>Institucional</h3>
+            <ul>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Gobierno Corporativo</a></li>
+                <li><a href="#">Cultura Medicips</a></li>
+                <li><a href="#">Prensa</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Seguridad Legal</h3>
+            <ul>
+                <li><a href="#">Tratamiento de Datos</a></li>
+                <li><a href="#">Términos de Uso</a></li>
+                <li><a href="#">Política de Privacidad</a></li>
+                <li><a href="#">Reportar Incidente</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column contact-data">
+            <h3>Contacto Directo</h3>
+            <p><strong>Soporte:</strong> ayuda@medicips.com</p>
+            <p><strong>Línea:</strong> 01-8000-123-456</p>
+            <p><strong>Sede:</strong> Bogotá, Colombia</p>
+        </div>
+    </div>
+
+    <div class="footer-copyright">
+        <p>&copy; 2026 Medicips S.A.S. Todos los derechos reservados. <span class="legal-tag">Sistema de Gestión Protegido</span></p>
+    </div>
+</footer>
+
+  </body>
+  </html>
