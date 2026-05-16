@@ -1,22 +1,182 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <title>Comprobantes de pago</title>
-  <link rel="stylesheet" href="style.css">
 </head>
+
+<body>
+    <nav>
+        <div class="nav-container">
+            <div class="logo-container">
+                <a href="#">
+                    <img src="img/6t-removebg-preview.png" alt="logo" class="logo">
+                </a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#">Inicio</a></li>
+                <li><a href="#">Sobre Nosotros</a></li>
+                <li><a href="#">Procesos</a></li>
+                <li><a href="#">Contacto</a></li>
+            </ul>
+        </div>
+    </nav>
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Comprobantes de pago</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
 <body>
 
-  <div class="Contenedor-principal">
+    <div class="hero">
 
-    <a href="index.html">← Volver</a>
+        <div class="hero-text">
 
-    <h1>¿Cómo se generan los comprobantes de pago?</h1>
+            <a href="index.html" class="volver">
+                Volver al inicio
+            </a>
 
-    <p>Aquí escribes tu explicación...</p>
+            <h1>
+                ¿Cómo se generan los comprobantes de pago?
+            </h1>
 
-    <img src="img/23180.png" alt="Explicación">
+            <p>
+                Aprende paso a paso cómo consultar,
+                descargar y generar comprobantes
+                de manera rápida y sencilla.
+            </p>
 
-  </div>
+            <button>
+                Ver proceso
+            </button>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="img/23180.png" alt="Explicación">
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <section class="seccion-pagos">
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/2.jpg" alt="Paso 1">
+        <div class="card-texto">
+            <h3>Paso 1</h3>
+            <p>Desde el menú principal del sistema SIESA 8.5, dirígete a la barra de navegación superior y selecciona la opción Admon. 
+                En el submenú desplegable, ubica el módulo Nómina y haz clic sobre él para ingresar al sistema de liquidación de nómina.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/3.jpg" alt="Paso 2">
+        <div class="card-texto">
+            <h3>Paso 2</h3>
+            <p>Dentro del módulo de Nómina, dirígete al menú Nómina en la barra superior. Desplázate hasta la opción 
+                Comprobantes de Pago y, en el submenú que aparece a la derecha, selecciona Relación/Volantes Consolidados.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/4.jpg" alt="Paso 3">
+        <div class="card-texto">
+            <h3>Paso 3</h3>
+            <p>El sistema mostrará una pantalla de confirmación con la información del documento de liquidación: lapso, empresa, tipo de documento y número. 
+                Verifica que los datos sean correctos y presiona S cuando el sistema pregunte "¿Es Correcto (S/N)?".
+            </p>
+        </div>
+    </div>
+
+        <div class="card">
+        <img src="/home/onlylettuce/allison/img/5.jpg" alt="Paso 4">
+        <div class="card-texto">
+            <h3>Paso 4</h3>
+            <p>Se desplegará la pantalla de Opciones de Selección. Aquí puedes filtrar por empleado específico, C.O., centro de costo, proyecto, forma de pago o grupo de empleado.
+                 Si deseas generar los comprobantes para todos los empleados, deja los campos en blanco y presiona Enter en cada uno.
+            </p>
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/6.jpg" alt="Paso 5">
+        <div class="card-texto">
+            <h3>Paso 5</h3>
+            <p>A continuación aparecerán las Opciones de Impresión de Volante. Configura los parámetros según necesites: presenta base en volante, 
+                saldos de préstamo, acumulado de cuotas, entre otros. En el campo Presenta Vls Consol. Mes An. selecciona 0 = No o 1 = Sí según requieras, luego confirma.
+            </p> 
+        </div>
+    </div>
+
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/7.jpg" alt="Paso 6">
+        <div class="card-texto">
+            <h3>Paso 6</h3>
+            <p>El sistema preguntará si deseas Enviar Volantes Vía E-mail. Selecciona 0 = No si prefieres descarga directa, 
+                o 1 = Sí si deseas enviarlo por correo electrónico. En caso de elegir correo, completa el asunto y la clave del correo electrónico.
+            </p> 
+        </div>
+    </div>
+
+    <div class="card">
+        <img src="/home/onlylettuce/allison/img/8.jpg" alt="Paso 7">
+        <div class="card-texto">
+            <h3>Paso 7</h3>
+            <p>inalmente, aparecerá la pantalla de Opciones de Impresión. Verifica que el Dispositivo de Salida esté configurado como Disco para generar el archivo descargable.
+                El sistema asignará automáticamente el nombre del listado. Confirma presionando S en "¿Es Correcto [S/N]?" para completar la generación del comprobante.
+            </p> 
+        </div>
+    </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox-overlay" id="lightbox" onclick="cerrarLightbox()">
+    <img src="" id="lightbox-img" alt="Vista ampliada">
+</div>
+
+<script>
+    const imagenes = document.querySelectorAll('.seccion-pagos .card img');
+
+    imagenes.forEach(img => {
+        img.addEventListener('click', () => {
+            document.getElementById('lightbox-img').src = img.src;
+            document.getElementById('lightbox').classList.add('activo');
+        });
+    });
+
+    function cerrarLightbox() {
+        document.getElementById('lightbox').classList.remove('activo');
+    }
+
+    // También cerrar con tecla Escape
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') cerrarLightbox();
+    });
+</script>
 
 </body>
+
+<footer style="
+    width: 100%;
+    background: linear-gradient(180deg, #f5f5f5 0%, #e8e8e8 100%);
+    padding: 40px 0 30px;
+    text-align: center;
+    font-family: 'Segoe UI', sans-serif;
+">
+    <div style="width:40px; height:2px; background:#0067b8; margin: 0 auto 20px; border-radius:2px;"></div>
+    <p style="color:#888; font-size:13px; margin: 6px 0;">© 2026 Medicips — Todos los derechos reservados</p>
+    <p style="color:#888; font-size:13px; margin: 6px 0;">Uso interno · Solo personal autorizado</p>
+</footer>
+
+
 </html>

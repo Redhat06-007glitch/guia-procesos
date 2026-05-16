@@ -314,3 +314,143 @@ p.texto {
     text-transform: uppercase;
     font-size: 0.7rem;
 }
+
+/* AQUI ES LA PAGINA DE LA DICHA 13*/
+
+body{
+    margin:0;
+    font-family: "Segoe UI", sans-serif;
+    background:#f5f5f5;
+    color:#111;
+}
+
+.hero{
+    max-width:1200px;
+    margin:auto;
+    padding:80px 40px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:60px;
+}
+
+.hero-text{
+    flex:1;
+}
+
+.hero-text h1{
+    font-size:56px;
+    line-height:1.1;
+    margin-bottom:20px;
+}
+
+.hero-text p{
+    font-size:18px;
+    color:#555;
+    line-height:1.6;
+    max-width:500px;
+}
+
+.hero-text button{
+    margin-top:30px;
+    padding:14px 28px;
+
+    border:none;
+    border-radius:12px;
+
+    background:#0067b8;
+    color:white;
+
+    font-size:16px;
+    cursor:pointer;
+}
+
+.hero-image{
+    flex:1;
+}
+
+.hero-image img{
+    width:100%;
+    max-width:500px;
+}
+
+
+/* ESTOS SON LOS PASOS TARJETA 13 */
+
+.seccion-pagos {
+    max-width: 1200px;
+    margin: auto;
+    padding: 40px 80px 80px;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.seccion-pagos .card {
+    background: white;
+    border-radius: 24px;
+    padding: 30px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    transition: 0.3s;
+    border: none;
+    min-height: 140px;
+}
+
+.seccion-pagos .card:hover {
+    transform: translateY(-4px);
+}
+
+.seccion-pagos .card img {
+    width: 350px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 12px; 
+    flex-shrink: 0;
+}
+
+.seccion-pagos .card-texto h3 {
+    margin: 0;
+    font-size: 28px;
+}
+
+.seccion-pagos .card-texto p {
+    margin-top: 10px;
+    color: #555;
+    line-height: 1.6;
+    font-size: 17px;
+}
+
+
+/* LIGHTBOX */
+.lightbox-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    z-index: 9999;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+}
+
+.lightbox-overlay.activo {
+    display: flex;
+}
+
+.lightbox-overlay img {
+    max-width: 90%;
+    max-height: 90vh;
+    border-radius: 12px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.5);
+}
+
+.seccion-pagos .card img {
+    cursor: zoom-in;
+}
